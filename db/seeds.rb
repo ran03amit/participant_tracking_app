@@ -14,8 +14,8 @@ coordinators = Coordinator.create([
 
 # Create registries
 registries = Registry.create([
-  { name: 'Registry 1', location: 'Location 1' },
-  { name: 'Registry 2', location: 'Location 2' }
+  { name: 'Registry 1', location: 'Location 1', state: 'Open' },
+  { name: 'Registry 2', location: 'Location 2', state: 'Open' }
 ])
 
 # Assign coordinators to registries

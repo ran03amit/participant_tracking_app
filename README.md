@@ -1,24 +1,42 @@
-# README
+## Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. Clone the repository:
 
-Things you may want to cover:
+```
+git clone git@github.com:ran03amit/participant_tracking_app.git
+```
 
-* Ruby version
+2. Navigate to rails project folder
 
-* System dependencies
+```
+cd participant_tracking_app
+```
 
-* Configuration
+3. Install the dependencies
 
-* Database creation
+```
+rvm list
+rvm use ruby-3.0.0
+bundle install
+rails db:migrate
+rails db:seed
+```
 
-* Database initialization
+## Running the Tests using RSpec
 
-* How to run the test suite
+To run the tests, execute the following command:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rspec spec
+```
 
-* Deployment instructions
 
-* ...
+## Running the Service
+
+To start the service, run the following command:
+
+```
+rails server
+```
+
+The service will be accessible at http://localhost:3000.
