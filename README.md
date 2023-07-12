@@ -11,7 +11,8 @@ The Participant Tracking App is a Ruby on Rails application designed to track pa
 - Enroll participants in multiple open registries.
 - Prevent participants from enrolling multiple times in the same registry.
 - Capture enrollment information, including date, method of contact (phone or email), remarks, and the enrolling coordinator.
-- View a list of participants for a given registry, grouped by the coordinator who enrolled them.
+- View a list of participants for a given registry, as well as all participants.
+- Export participants for each coordinator in a csv format.
 
 ## Installation
 
