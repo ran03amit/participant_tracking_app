@@ -1,0 +1,45 @@
+<% if flash[:notice].present? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<h1>Participants</h1>
+<h3>Registry: <%= @registry.name %></h3>
+<h3>Registry State: <%= @registry.state %></h3>
+
+<% if @enrollments.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Coordinator</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <% @enrollments.each do |coordinator, enrollments| %>
+          <% enrollments.each do |enrollment| %>
+            <% participant = Participant.find  enrollment.participant_id%>
+            <tr>
+              <% if coordinator %>
+                <td><%= coordinator.name %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <td><%= participant.name %></td>
+              <td><%= participant.gender %></td>
+              <td><%= participant.date_of_birth %></td>
+            </tr>
+          <% end %>
+        <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No associated participants found.</p>
+<% end %>
+<br>
+<%= (link_to 'Enroll Participant', new_registry_participant_path(@registry), class: 'link') if @registry.state == 'Open' %>
+<%= link_to 'Back', registries_path, class: 'button' %>

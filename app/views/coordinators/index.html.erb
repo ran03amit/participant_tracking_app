@@ -1,0 +1,39 @@
+<% if flash[:notice].present? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<h1>Coordinators</h1>
+
+<table class="coordinators-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @coordinators.each do |coordinator| %>
+      <tr>
+        <td><%= coordinator.name %></td>
+        <td><%= coordinator.email %></td>
+        <td><%= coordinator.phone_number %></td>
+        <td>
+          <%= link_to 'View', coordinator_path(coordinator), class: 'button view-button' %>
+          <%= link_to 'Edit', edit_coordinator_path(coordinator), class: 'button edit-button' %>
+          <%= link_to 'Delete', coordinator_path(coordinator), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button delete-button', onclick: "event.preventDefault(); document.getElementById('delete-coordinator-#{coordinator.id}').classList; document.getElementById('delete-coordinator-#{coordinator.id}').submit();" %>
+          <%= form_with model: coordinator, url: coordinator_path(coordinator), method: :delete, id: "delete-coordinator-#{coordinator.id}", class: 'hidden' do |form| %>
+            <%= form.submit 'Delete' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Coordinator', new_coordinator_path, class: 'link button' %>
+<%= link_to 'Set Up Registry', new_registry_path, class: 'button' %>
+<%= link_to 'Export Participants', export_participants_path, class: 'button' %>

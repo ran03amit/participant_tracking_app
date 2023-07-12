@@ -1,0 +1,33 @@
+<div class="show-details">
+  <h1>Coordinator Details</h1>
+
+  <p><strong>Name:</strong> <%= @coordinator.name %></p>
+  <p><strong>Email:</strong> <%= @coordinator.email %></p>
+  <p><strong>Phone Number:</strong> <%= @coordinator.phone_number %></p>
+
+  <h2>Associated Registries</h2>
+  <% if @coordinator.registries.any? %>
+    <ul>
+      <% @coordinator.registries.each do |registry| %>
+        <li><%= link_to registry.name, registry_path(registry) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No associated registries found.</p>
+  <% end %>
+
+  <h2>Associated Participants</h2>
+  <% if @coordinator.participants.any? %>
+    <ul>
+      <% @coordinator.participants.each do |participant| %>
+        <li><%= link_to participant.name, registry_participant_path(1, participant) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No associated participants found.</p>
+  <% end %>
+  <br>
+  <%= link_to 'Back', coordinators_path, class: 'button' %>
+  <%= link_to 'Set Up Registry', registries_path , class: 'link'%>
+  <%= link_to 'Edit', edit_coordinator_path(@coordinator), class: 'button' %>
+</div>

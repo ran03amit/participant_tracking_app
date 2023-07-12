@@ -1,0 +1,44 @@
+<% if flash[:notice].present? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="registries-container">
+  <h1>Registries</h1>
+
+  <table class="registries-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>State</th>
+        <th>Coordinators</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @registries.each do |registry| %>
+        <tr>
+          <td>
+            <%= link_to registry.name, registry_path(registry) %>
+          </td>
+          <td><%= registry.location %></td>
+          <td><%= registry.state %></td>
+          <td>
+            <% registry.coordinators.each do |coordinator| %>
+              <%= link_to coordinator.name, coordinator_path(coordinator) %>
+              <br>
+              <br>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'View Participants', registry_participants_path(registry) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Registry', new_registry_path, class: 'link button' %>
+</div>

@@ -1,0 +1,42 @@
+<% if flash[:notice].present? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="participants-container">
+  <h1>Participants</h1>
+
+  <% if @participants.any? %>
+    <table class="participants-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Date of Birth</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @participants.each do |participant| %>
+          <tr>
+            <td><%= participant.name %></td>
+            <td><%= participant.gender %></td>
+            <td><%= participant.date_of_birth %></td>
+            <td>
+              <%= link_to 'View', registry_participant_path(1, participant), class: 'button view-button' %>
+              <%= link_to 'Delete', registry_participant_path(1, participant), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button delete-button', onclick: "event.preventDefault(); document.getElementById('delete-participant-#{participant.id}').submit();" %>
+              <%= form_with model: participant, url: registry_participant_path(1, participant), method: :delete, id: "delete-participant-#{participant.id}", class: 'hidden' do |form| %>
+                <%= form.submit 'Delete' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No participants found.</p>
+  <% end %>
+  <br>
+  <%= link_to 'Back', registries_path, class: 'button' %>
+</div>

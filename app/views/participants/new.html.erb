@@ -1,0 +1,52 @@
+<% if defined?(@enrollment) && @enrollment.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this registry from being saved:</h2>
+    <ul>
+      <% @enrollment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-container">
+  <h1>New Participant</h1>
+  <h3>Registry: <%= @registry.name %></h3>
+
+  <%= form_with model: @participant, url: registry_participants_path(@registry) do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.label :gender %>
+      <%= form.text_field :gender %>
+    </div>
+    <div class="field">
+      <%= form.label :date_of_birth %>
+      <%= form.date_field :date_of_birth %>
+    </div>
+    <div class="field">
+      <%= form.label :coordinator_id %>
+      <%= form.collection_select :coordinator_id, @registry.coordinators, :id, :name, prompt: 'Select a Coordinator' %>
+    </div>
+    <div class="field">
+      <%= form.label :date_of_enrollment %>
+      <%= form.date_field :date_of_enrollment %>
+    </div>
+    <div>
+      <%= form.label :method_of_contact %>
+      <%= form.text_field :method_of_contact %>
+    </div>
+    <div>
+      <%= form.label :remarks %>
+      <%= form.text_area :remarks %>
+    </div>
+    <br>
+    <div>
+      <%= form.submit 'Enroll Participant', class: 'link' %>
+    </div>
+  <% end %>
+</div>
+<br>
+<%= link_to 'Back', registry_participants_path(@registry), class: 'button' %>

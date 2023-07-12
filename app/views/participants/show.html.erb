@@ -1,0 +1,41 @@
+<div class="show-details">
+  <h1>Participant Details</h1>
+
+  <p><strong>Name:</strong> <%= @participant.name %></p>
+  <p><strong>Gender:</strong> <%= @participant.gender %></p>
+  <p><strong>Date of Birth:</strong> <%= @participant.date_of_birth %></p>
+
+  <h2>Enrollments</h2>
+  <% if @participant.enrollments.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Date of Enrollment</th>
+          <th>Method of Contact</th>
+          <th>Remarks</th>
+          <th>Coordinator</th>
+          <th>Registry</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @participant.enrollments.each do |enrollment| %>
+          <tr>
+            <td><%= enrollment.date_of_enrollment %></td>
+            <td><%= enrollment.method_of_contact %></td>
+            <td><%= enrollment.remarks %></td>
+            <td>
+              <%= link_to enrollment.coordinator.name, coordinator_path(enrollment.coordinator) %>
+            </td>
+            <td>
+              <%= link_to enrollment.registry.name, registry_participants_path(enrollment.registry) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No enrollments found.</p>
+  <% end %>
+  <br>
+  <%= link_to 'Back', registries_path, class: 'button' %>
+</div>

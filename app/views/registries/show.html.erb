@@ -1,0 +1,38 @@
+<div class="show-details">
+  <h1>Registry Details</h1>
+
+  <p><strong>Name:</strong> <%= @registry.name %></p>
+  <p><strong>Location:</strong> <%= @registry.location %></p>
+  <p><strong>State:</strong> <%= @registry.state %></p>
+
+  <h2>Coordinators</h2>
+  <% if @registry.coordinators.any? %>
+    <ul>
+      <% @registry.coordinators.each do |coordinator| %>
+        <li><%= link_to coordinator.name, coordinator_path(coordinator) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No coordinators found.</p>
+  <% end %>
+
+  <h2>Participants</h2>
+  <% if @registry.participants.any? %>
+    <ul>
+      <% @registry.participants.each do |participant| %>
+      <li><%= link_to participant.name, registry_participant_path(@registry, participant) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No participants found.</p>
+  <% end %>
+  <br>
+  <%= (link_to 'Enroll Participant', new_registry_participant_path(@registry), class: 'link') if @registry.state == 'Open' %>
+  <%= link_to 'Back', registries_path , class: 'button'%>
+  <%= link_to 'Edit', edit_registry_path(@registry), class: 'button' %>
+  <%= link_to 'Delete', registry_path(@registry), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button delete-button', onclick: "event.preventDefault(); document.getElementById('delete-registry-form').submit();" %>
+  <%= form_with model: @registry, url: registry_path(@registry), method: :delete, id: 'delete-registry-form', class: 'hidden' do |form| %>
+    <%= form.submit 'Delete' %>
+  <% end %>
+
+</div>

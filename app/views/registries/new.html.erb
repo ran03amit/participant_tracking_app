@@ -1,0 +1,37 @@
+<% if @registry.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@registry.errors.count, "error") %> prohibited this registry from being saved:</h2>
+    <ul>
+      <% @registry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-container">
+  <h1>New Registry</h1>
+  <%= form_with model: @registry, url: registries_path do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.label :location %>
+      <%= form.text_field :location %>
+    </div>
+    <div class="field">
+      <%= form.label :state %>
+      <%= form.select :state, options_for_select(['Open', 'Closed']) %>
+    </div>
+    <div class="field">
+      <%= form.label :coordinator_ids, 'Coordinators' %>
+      <%= form.collection_select :coordinator_ids, (@coordinators || Coordinator.all), :id, :name, {}, multiple: true %>
+    </div>
+    <div>
+      <%= form.submit 'Create Registry' %>
+    </div>
+  <% end %>
+</div>
+<br>
+<%= link_to 'Back', registries_path , class: 'button'%>
