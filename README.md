@@ -1,4 +1,22 @@
-## Setup
+# Participant Tracking App
+
+The Participant Tracking App is a Ruby on Rails application designed to track participants across multiple registries. It allows coordinators to manage registries, coordinators, and participants efficiently.
+
+## Features
+
+- Create and manage registries, including name, location, and state (open or closed).
+- Add and manage coordinators with unique email addresses, including name and phone number.
+- Assign multiple coordinators to each registry.
+- Register participants with details such as name, gender, and date of birth.
+- Enroll participants in multiple open registries.
+- Prevent participants from enrolling multiple times in the same registry.
+- Capture enrollment information, including date, method of contact (phone or email), remarks, and the enrolling coordinator.
+- View a list of participants for a given registry, grouped by the coordinator who enrolled them.
+
+## Installation
+
+To set up the Participant Tracking App locally, follow these steps:
+
 
 1. Clone the repository:
 
