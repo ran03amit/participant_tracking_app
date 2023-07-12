@@ -15,6 +15,8 @@ cd participant_tracking_app
 3. Install the dependencies
 
 ```
+Ruby(ruby 3.0.0), Rails(Rails 7.0.6)
+
 rvm list
 rvm use ruby-3.0.0
 bundle install
